@@ -14,11 +14,77 @@ This section outlines how to set up the environment and execute the data pipelin
 * Databricks Workspace (with proper AWS integration setup).
 * Python 3.x, Git for version control.
 
+### Data Flow
+```bash
+                 
+     ┌───────────▼────────────┐
+     │  ├── Bronze (Raw)      │  ← Amazon S3
+     │  ├── Silver (Cleansed) │  ← Databricks cleaning
+     │  └── Gold (Star Schema)│  ← Load Fact table to Amazon S3
+     └───────────┬────────────┘
+                 │
+                 │
+           ┌─────▼─────┐
+           │ Metabase   │
+           │ Dashboards │
+           └────────────┘
+```
+### Visualization with Metabase 
+#### 1. Sale Performace
+<img width="1857" height="926" alt="image" src="https://github.com/Dungpham0703/e-commerce-ETL/blob/main/reports/Sale_Performace_Dashboard.jpg" />
+**Key Metrics Addressed**
+
+Key Performance Indicators (KPIs)
+
+    Total Revenue: What is the total sales revenue to date?
+    
+    Total Orders: What is the total number of orders to date?
+    
+    Total Products Sold: What is the total quantity of products sold to date?
+    
+    AVG Value per Order: What is the average monetary value of each order?
+
+Detailed Visualizations
+
+    Monthly Revenue & Orders: How have Total Orders and Total Revenue trended month-over-month over time?
+    
+    Orders by Payment Method: What is the distribution of orders across different payment methods (redit, boleto, voucher)?
+    
+    Revenue per State: How is the Total Revenue geographically distributed across different states in the country?
+    
+    Key Metrics by Category (Top 5): What are the top 5 product categories based on total revenue, average order value, and total orders?
+    
+    Daily Revenue & Orders by Dayname: How do Total Orders and Total Revenue fluctuate across the days of the week?
+#### 2. Customer Insights
+<img width="1857" height="926" alt="image" src="https://github.com/Dungpham0703/e-commerce-ETL/blob/main/reports/Customer%20Insights.jpg" />
+**Key Metrics Addressed**
+
+Key Performance Indicators (KPIs)
+
+    Total Customers: What is the total number of unique customers to date?
+    
+    Repeat Customers: What is the total number of customers who have placed more than one order?
+    
+    Customer Lifetime Value (LCL...): What is the average predicted monetary value a customer will bring over their relationship with the company?
+    
+    Average Purchase Frequency: On average, how often does a customer place an order?
+
+Detailed Visualizations
+
+    Total Reviews based on Review Category: What is the distribution of customer reviews across different star ratings (1-star through 5-star)?
+    
+    Key Metrics by State: Which states have the highest total number of customers, repeat customers, and the highest repeat rate?
+    
+    Customer per State: How are total customers geographically distributed across different states?
+    
+    Top 10 Customer by number of Orders: Who are the top 10 customers (by unique ID) based on the number of orders they have placed?
+
+
 ### Running the Pipeline
 
 The core transformation logic resides in the `databricks/` directory and is executed as a Databricks Job configured to run on a Spark cluster.
 
-1.  **Configure AWS Access:** Ensure your Databricks cluster is configured to access S3 (e.g., using Instance Profiles or Secret Scopes).
+1.  **Configure AWS Access:** Ensure your Databricks cluster is configured to access S3 (using Instance Profiles or Secret Scopes).
 2.  **Deployment:** Clone the repository to your Databricks Repos.
 
     ```bash
