@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import IntegerType, TimestampType
 
-spark = SparkSession.builder.appName("OlistDataPipeline_Fixed").getOrCreate()
+spark = SparkSession.builder.appName("E-Commerce-Data-Pipeline").getOrCreate()
 
 s3_path = 's3://brazil-e-commerce/data/'
 target_delta_path = f"{s3_path}delta/fact_sales/"
