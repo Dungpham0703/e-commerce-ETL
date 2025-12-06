@@ -1,4 +1,3 @@
-#Transform and Modeling Fact Table with PySpark
 from pyspark.sql import SparkSession 
 from pyspark.sql import functions as F
 from pyspark.sql.types import IntegerType, TimestampType
@@ -78,7 +77,7 @@ df_sales_fact = df_fact.select(
     F.col("p.product_category_standard").alias("product_category")
 )
 
-#  5. Save to Delta Lake 
+#  5 Save to Delta Lake 
 target_delta_path = f"{s3_path}delta/fact_sales/"
 df_sales_fact.write.format("delta") \
              .mode("overwrite") \
