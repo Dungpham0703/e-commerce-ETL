@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import IntegerType, TimestampType
 
-spark = SparkSession.builder.appName("E-Commerce-Data-Pipeline").getOrCreate()
+spark = SparkSession.builder.appName("Olist_E_Commerce_Data_Pipeline").getOrCreate()
 
 s3_path = 's3://brazil-e-commerce/data/'
 target_delta_path = f"{s3_path}delta/fact_sales/"
@@ -92,5 +92,5 @@ spark.sql(f"""
 """)
 
 print(f"Fact table has been created successfully: **{fact_table_name}**")
-print("Schema cuối cùng:")
+
 df_sales_fact.printSchema()
