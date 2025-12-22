@@ -19,6 +19,7 @@ print("--- Data Transform Process ---")
 
 df_reviews_cleaned = df_reviews.select(
     F.col("review_id"),
+    F.col("review_score").alias("review_rating"),
     F.col("order_id"),
     F.col("review_comment_message"),
     F.col("review_creation_date").cast(TimestampType()).alias("review_created_at")
@@ -63,7 +64,7 @@ df_sales_fact = df_fact.select(
     F.col("s.seller_id").alias("seller_key"),
     F.col("p.product_id").alias("product_key"),
     
-    # METRICS (Facts)
+    # METRICS
     F.col("oi.price").alias("product_price"),
     F.col("oi.freight_value").alias("shipping_cost"),
     F.col("r.review_rating"),
@@ -77,7 +78,7 @@ df_sales_fact = df_fact.select(
     F.col("p.product_category_standard").alias("product_category")
 )
 
-#  5 Save to Delta Lake 
+#  5. Save to Delta Lake 
 target_delta_path = f"{s3_path}delta/fact_sales/"
 df_sales_fact.write.format("delta") \
              .mode("overwrite") \
@@ -92,5 +93,4 @@ spark.sql(f"""
 """)
 
 print(f"Fact table has been created successfully: **{fact_table_name}**")
-
 df_sales_fact.printSchema()
