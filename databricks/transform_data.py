@@ -63,7 +63,6 @@ df_sales_fact = df_fact.select(
     F.col("c.customer_unique_id").alias("customer_key"),
     F.col("s.seller_id").alias("seller_key"),
     F.col("p.product_id").alias("product_key"),
-    
     # METRICS
     F.col("oi.price").alias("product_price"),
     F.col("oi.freight_value").alias("shipping_cost"),
