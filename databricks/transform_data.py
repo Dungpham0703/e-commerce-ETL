@@ -77,7 +77,7 @@ df_sales_fact = df_fact.select(
     F.col("p.product_category_standard").alias("product_category")
 )
 
-#  5. Save to Delta Lake 
+#  Save to Delta Lake 
 target_delta_path = f"{s3_path}delta/fact_sales/"
 df_sales_fact.write.format("delta") \
              .mode("overwrite") \
