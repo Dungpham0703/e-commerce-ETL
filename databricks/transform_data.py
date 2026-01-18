@@ -93,3 +93,5 @@ spark.sql(f"""
 
 print(f"Fact table has been created successfully: **{fact_table_name}**")
 df_sales_fact.printSchema()
+
+"""Hello"""
